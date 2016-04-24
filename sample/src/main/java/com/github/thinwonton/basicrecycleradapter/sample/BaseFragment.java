@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.github.thinwonton.basicrecycleradapter.BasicAdapter;
 import com.github.thinwonton.basicrecycleradapter.sample.model.CatGenerator;
 import com.github.thinwonton.basicrecycleradapter.sample.utils.OnMenuClickListener;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by Administrator on 2016/4/18.
@@ -23,19 +24,19 @@ public abstract class BaseFragment<A extends BasicAdapter> extends Fragment
 	private int index = -1;
 
 	private A mAdapter;
-    private RecyclerView mRecyclerView;
+	private RecyclerView mRecyclerView;
 
 	protected abstract A createAdapter();
 
 	protected abstract void configRecyclerView(RecyclerView recyclerView);
 
-    public A getAdapter() {
-        return mAdapter;
-    }
+	public A getAdapter() {
+		return mAdapter;
+	}
 
-    public RecyclerView getRecyclerView() {
-        return mRecyclerView;
-    }
+	public RecyclerView getRecyclerView() {
+		return mRecyclerView;
+	}
 
 	@Nullable
 	@Override
@@ -62,7 +63,15 @@ public abstract class BaseFragment<A extends BasicAdapter> extends Fragment
 				mAdapter.setItems(CatGenerator.getList());
 			}
 		}, 500);
-    }
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+		refWatcher.watch(this);
+	}
 
 	@Override
 	public void onAddItemActionClick() {
@@ -87,23 +96,23 @@ public abstract class BaseFragment<A extends BasicAdapter> extends Fragment
 		mAdapter.setItems(CatGenerator.getList());
 	}
 
-    @Override
-    public void onAddHeaderActionClick() {
+	@Override
+	public void onAddHeaderActionClick() {
 
-    }
+	}
 
-    @Override
-    public void onRemoveHeaderActionClick() {
+	@Override
+	public void onRemoveHeaderActionClick() {
 
-    }
+	}
 
-    @Override
-    public void onAddFooterActionClick() {
+	@Override
+	public void onAddFooterActionClick() {
 
-    }
+	}
 
-    @Override
-    public void onRemoveFooterActionClick() {
+	@Override
+	public void onRemoveFooterActionClick() {
 
-    }
+	}
 }

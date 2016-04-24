@@ -1,6 +1,5 @@
 package com.github.thinwonton.basicrecycleradapter.sample.mutipletypeadapter;
 
-import android.util.Log;
 import android.view.View;
 
 import com.github.thinwonton.basicrecycleradapter.MultipleTypeAdapter;
@@ -18,7 +17,6 @@ public class MultipleLinearAdapter extends MultipleTypeAdapter<Cat, MultipleLine
 
 	@Override
 	protected int layoutId(int type) {
-        Log.e("调试", "layoutId---> type = " + type);
         if (Cat.TYPE.TYPE1.ordinal() == type) {
             return R.layout.list_cat_type1_item;
         } else {
