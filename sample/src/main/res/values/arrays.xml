@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="planets_array">
+        <item>LinearLayout</item>
+        <item>GridLayout</item>
+        <item>StaggeredGridLayout</item>
+    </string-array>
+
+    <string-array name="cat_name">
+        <item>ailsa</item>
+        <item>alice</item>
+        <item>cassie</item>
+        <item>ella</item>
+        <item>frederica</item>
+        <item>iris</item>
+        <item>lucine</item>
+        <item>mary</item>
+        <item>pearl</item>
+        <item>silvia</item>
+        <item>zoey</item>
+    </string-array>
+</resources>

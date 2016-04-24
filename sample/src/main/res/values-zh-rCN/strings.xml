@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">sample</string>
+    <string name="action_settings">设置</string>
+    <string name="action_add">添加</string>
+    <string name="action_delete">删除</string>
+    <string name="action_clear">清除</string>
+    <string name="action_set">重设</string>
+</resources>

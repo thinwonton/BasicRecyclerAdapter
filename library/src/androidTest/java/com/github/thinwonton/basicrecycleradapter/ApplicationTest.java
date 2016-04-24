@@ -1,4 +1,4 @@
-package com.github.thinwonton.basicrecycleradapter.library;
+package com.github.thinwonton.basicrecycleradapter;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
