@@ -14,7 +14,7 @@ public class HeaderFooterAdapterActivity extends BaseDrawerActivity {
 
 	@Override
 	protected Fragment getGridFragment() {
-		return new MultipleTypeGridFragment();
+		return new HeaderFooterGridFragment();
 	}
 
 	@Override

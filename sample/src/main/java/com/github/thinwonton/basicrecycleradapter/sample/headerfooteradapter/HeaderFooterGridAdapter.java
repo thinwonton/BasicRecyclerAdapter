@@ -2,14 +2,14 @@ package com.github.thinwonton.basicrecycleradapter.sample.headerfooteradapter;
 
 import android.view.View;
 
-import com.github.thinwonton.basicrecycleradapter.MultipleTypeAdapter;
+import com.github.thinwonton.basicrecycleradapter.HeaderFooterMultipleTypeAdapter;
 import com.github.thinwonton.basicrecycleradapter.sample.R;
 import com.github.thinwonton.basicrecycleradapter.sample.model.Cat;
 
 /**
  * Created by Administrator on 2016/4/19.
  */
-public class MultipleGridAdapter extends MultipleTypeAdapter<Cat, MultipleGridViewHolder> {
+public class HeaderFooterGridAdapter extends HeaderFooterMultipleTypeAdapter<Cat, MultipleGridViewHolder> {
 	@Override
 	protected MultipleGridViewHolder viewHolder(View view, int type) {
 		return new MultipleGridViewHolder(view);

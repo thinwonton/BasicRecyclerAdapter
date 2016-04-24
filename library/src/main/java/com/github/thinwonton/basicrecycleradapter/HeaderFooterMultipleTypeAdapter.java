@@ -130,8 +130,8 @@ public abstract class HeaderFooterMultipleTypeAdapter<T, VH extends BasicViewHol
 		else if (isFooter(position)) {
 			return TYPE_FOOTER;
 		}
-        int type = getItemType(getRealItemPosition(position));
-        if (type == TYPE_HEADER || type == TYPE_FOOTER) {
+		int type = getItemType(getRealItemPosition(position));
+		if (type == TYPE_HEADER || type == TYPE_FOOTER) {
 			throw new IllegalArgumentException(
 			        "Item type cannot equal " + TYPE_HEADER + " or " + TYPE_FOOTER);
 		}
@@ -158,7 +158,7 @@ public abstract class HeaderFooterMultipleTypeAdapter<T, VH extends BasicViewHol
 
 	@Override
 	public void onBindViewHolder(VH holder, int position) {
-        if (isHeader(position)) {
+		if (isHeader(position)) {
 			View v = headers.get(position);
 			// add our view to a header view and display it
 			prepareHeaderFooter((HeaderFooterViewHolder) holder, v);
@@ -193,6 +193,14 @@ public abstract class HeaderFooterMultipleTypeAdapter<T, VH extends BasicViewHol
 		viewGroup.setLayoutParams(layoutParams);
 	}
 
+	@Override
+	protected int getGridSpan(int type, int position) {
+		if (isHeader(position) || isFooter(position)) {
+			return getMaxGridSpan();
+		}
+		return super.getGridSpan(type, getRealItemPosition(position));
+	}
+
 	private void prepareHeaderFooter(HeaderFooterViewHolder vh, View view) {
 		if (LayoutManagerTypeHelper.isStaggeredGridLayout(getLayoutManager())) {
 			StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.LayoutParams(
@@ -200,6 +208,11 @@ public abstract class HeaderFooterMultipleTypeAdapter<T, VH extends BasicViewHol
 			layoutParams.setFullSpan(true);
 			vh.itemView.setLayoutParams(layoutParams);
 		}
+
+		ViewGroup.LayoutParams layoutParams = vh.itemView.getLayoutParams();
+		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+		vh.itemView.setLayoutParams(layoutParams);
+
 		// if the view already belongs to another layout, remove it
 		if (view.getParent() != null) {
 			((ViewGroup) view.getParent()).removeView(view);
@@ -217,9 +230,9 @@ public abstract class HeaderFooterMultipleTypeAdapter<T, VH extends BasicViewHol
 		return footers.size() > 0 && (position >= getHeaderViewsCount() + getRealItemCount());
 	}
 
-    protected int getRealItemPosition(int position) {
-        return position - headers.size();
-    }
+	protected int getRealItemPosition(int position) {
+		return position - headers.size();
+	}
 
 	public static class HeaderFooterViewHolder extends EmptyViewHolder {
 		public HeaderFooterViewHolder(View itemView) {
