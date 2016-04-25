@@ -4,12 +4,12 @@
     <string name="action_add">add item</string>
     <string name="action_delete">delete item</string>
     <string name="action_clear">clear item</string>
-
-    <string name="drawer_open">Open menu</string>
-    <string name="drawer_close">Close menu</string>
     <string name="action_set">set items</string>
     <string name="action_add_header">add header</string>
     <string name="action_remove_header">remove header</string>
     <string name="action_add_footer">add footer</string>
     <string name="action_remove_footer">remove footer</string>
+
+    <string name="drawer_open">Open menu</string>
+    <string name="drawer_close">Close menu</string>
 </resources>
