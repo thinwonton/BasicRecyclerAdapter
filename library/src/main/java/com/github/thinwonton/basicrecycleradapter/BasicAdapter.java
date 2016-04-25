@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.thinwonton.basicrecycleradapter.action.OnItemClickListener;
 import com.github.thinwonton.basicrecycleradapter.util.Operation;
 
 import java.util.ArrayList;
@@ -14,24 +15,24 @@ import java.util.List;
 /**
  * Created by HUGO on 2016/4/12.
  */
-public abstract class BasicAdapter<T, VH extends BasicViewHolder/*, AL extends ActionListener*/>
-        extends RecyclerView.Adapter<VH> implements Operation<T> {
+public abstract class BasicAdapter<T, VH extends BasicViewHolder> extends RecyclerView.Adapter<VH>
+        implements Operation<T> {
 
 	private List<T> items = new ArrayList<>();
 
 	private LayoutInflater inflater;
 
-//	private AL listener;
+	private OnItemClickListener onItemClickListener;
 
 	protected abstract VH viewHolder(View view, int type);
 
 	protected abstract @LayoutRes int layoutId(int type);
 
-    protected abstract int getItemType(int position);
+	protected abstract int getItemType(int position);
 
-//	public void setActionListener(AL listener) {
-//		this.listener = listener;
-//	}
+	public void setOnItemClickListener(OnItemClickListener listener) {
+		this.onItemClickListener = listener;
+	}
 
 	@Override
 	public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -41,14 +42,26 @@ public abstract class BasicAdapter<T, VH extends BasicViewHolder/*, AL extends A
 		}
 	}
 
-    @Override
+	@Override
 	public VH onCreateViewHolder(ViewGroup parent, int viewType) {
 		return onCreateItemViewHolder(parent, viewType);
 	}
 
 	@Override
 	public void onBindViewHolder(VH holder, int position) {
+		bindListener(holder, position);
 		holder.bindView(getItem(position), getItemType(position));
+	}
+
+	protected void bindListener(VH holder, final int position) {
+		if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onItemClickListener.onItemClick(v, position);
+				}
+			});
+		}
 	}
 
 	@Override
@@ -116,12 +129,12 @@ public abstract class BasicAdapter<T, VH extends BasicViewHolder/*, AL extends A
 		notifyDataSetChanged();
 	}
 
-    @Override
-    public int getRealItemCount() {
-        return this.items != null ? this.items.size() : 0;
-    }
+	@Override
+	public int getRealItemCount() {
+		return this.items != null ? this.items.size() : 0;
+	}
 
-    protected VH onCreateItemViewHolder(ViewGroup parent, int type) {
+	protected VH onCreateItemViewHolder(ViewGroup parent, int type) {
 		return viewHolder(this.inflater.inflate(layoutId(type), parent, false), type);
 	}
 
