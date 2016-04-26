@@ -6,6 +6,6 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'com.thinwonton:basicrecycleradapter:1.0.0'
+    compile 'com.github.thinwonton:basicrecycleradapter:1.0.0'
 }
 ```
