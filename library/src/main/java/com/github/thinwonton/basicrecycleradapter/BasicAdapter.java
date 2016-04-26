@@ -49,19 +49,12 @@ public abstract class BasicAdapter<T, VH extends BasicViewHolder> extends Recycl
 
 	@Override
 	public void onBindViewHolder(VH holder, int position) {
-		bindListener(holder, position);
-		holder.bindView(getItem(position), getItemType(position));
+		onBindItemViewListener(holder, position);
+		holder.bindView(position, getItem(position), getItemType(position));
 	}
 
-	protected void bindListener(VH holder, final int position) {
-		if (onItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onItemClickListener.onItemClick(v, position);
-				}
-			});
-		}
+	protected void onBindItemViewListener(VH holder, int position) {
+		holder.setOnItemClickListener(this.onItemClickListener);
 	}
 
 	@Override
