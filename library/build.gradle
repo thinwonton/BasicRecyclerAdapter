@@ -9,7 +9,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.1.0"
     }
     buildTypes {
         release {
@@ -23,7 +23,7 @@ publish {
     userOrg = 'thinwonton'
     groupId = 'com.github.thinwonton'
     artifactId = 'basicrecycleradapter'
-    publishVersion = '1.0.0'
+    publishVersion = '1.1.0'
     website = 'https://github.com/ThinWonton/BasicRecyclerAdapter'
 }
 
